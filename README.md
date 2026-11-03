@@ -51,8 +51,8 @@ All prices are shown **in Uganda shillings (UGX) only**:
 ## WhatsApp
 
 Every inquiry button opens WhatsApp with a message already written, using
-`https://wa.me/256780574574?text=...`. To change the number, find and replace
-`256780574574` in every HTML file.
+`https://wa.me/256780574575?text=...`. To change the number, find and replace
+`256780574575` in every HTML file.
 
 ## Image credits
 
