@@ -1,0 +1,512 @@
+/* ============================================================
+   PEARL ECO-FRIENDLY CREATIONS — style.css
+   One stylesheet for all five pages.
+   Sections are numbered so you can find things quickly.
+   ============================================================ */
+
+/* ---------- 1. COLOURS AND FONTS ---------- */
+:root{
+  /* Brand colours */
+  --ink:#0E211A;          /* near-black green, for text */
+  --forest:#14563F;       /* main green */
+  --forest-2:#0C3E2D;     /* darker green */
+  --cream:#FBF7EF;        /* page background */
+  --sand:#F1E8DA;         /* alternate section background */
+  --gold:#D9A02B;         /* accent / buttons */
+  --gold-2:#F0BC4E;       /* lighter gold for hover */
+  --gold-3:#F8CF74;       /* pale gold, for small text on green (contrast) */
+  --clay:#C25A2B;         /* warm accent */
+  --muted:#5A6B62;        /* secondary text */
+  --line:rgba(14,33,26,.14);
+  --white:#fff;
+
+  /* Type */
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+
+  /* Shape */
+  --radius:18px;
+  --radius-sm:12px;
+  --shadow:0 18px 40px -22px rgba(14,33,26,.45);
+  --wrap:1180px;
+}
+
+/* ---------- 2. RESET AND BASE ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font:1.0625rem/1.7 var(--body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* Keep anything decorative or wide from ever causing a sideways page scroll */
+section,div,header,footer,main{max-width:100%}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;margin:0;letter-spacing:-.015em}
+p{margin:0 0 1em}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+
+/* Focus ring for keyboard users */
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px;border-radius:4px;
+}
+
+/* Skip link for screen readers */
+.skip{position:absolute;left:-9999px;top:0;background:var(--forest);color:#fff;padding:12px 18px;z-index:200}
+.skip:focus{left:8px;top:8px}
+
+/* ---------- 3. SMALL PIECES OF TEXT ---------- */
+.eyebrow{
+  font:600 .78rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--forest);display:inline-flex;align-items:center;gap:10px;margin:0 0 16px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--gold)}
+.lede{font-size:1.14rem;color:var(--muted);max-width:60ch}
+.center{text-align:center}
+.center .lede{margin-inline:auto}
+.center .eyebrow{justify-content:center}
+
+/* ---------- 4. BUTTONS ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font:600 .97rem/1 var(--body);text-decoration:none;
+  padding:16px 28px;border-radius:999px;border:2px solid transparent;
+  cursor:pointer;transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-wa{background:var(--forest);color:#fff;box-shadow:var(--shadow)}
+.btn-wa:hover{background:var(--forest-2)}
+.btn-gold{background:var(--gold);color:#20160a;box-shadow:var(--shadow)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--forest);background:rgba(20,86,63,.06)}
+.btn-light{background:#fff;color:var(--forest)}
+.btn-light:hover{background:var(--sand)}
+.btn-sm{padding:12px 20px;font-size:.9rem}
+.btn-block{width:100%;justify-content:center}
+/* WhatsApp glyph */
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- 5. HEADER AND NAV ---------- */
+.site-head{
+  position:sticky;top:0;z-index:100;
+  background:rgba(251,247,239,.92);
+  backdrop-filter:saturate(160%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+/* Taller bar so the enlarged logo still sits comfortably (was 78px) */
+.head-in{display:flex;align-items:center;gap:18px;height:100px}
+/* flex:0 1 auto (not flex:none) lets the brand shrink on narrow screens,
+   so the text wraps instead of pushing the menu button off the screen. */
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;flex:0 1 auto;min-width:0}
+
+/* --- The logo, made large and eye-catching with CSS only ---
+   box-sizing:content-box means "height" is the artwork itself, so the
+   padding and border sit outside it and never shrink the logo. */
+.brand img{
+  height:74px;width:auto;box-sizing:content-box;flex:none;
+  padding:6px 15px;background:#fff;
+  border:1px solid rgba(217,160,43,.6);
+  border-radius:16px;
+  box-shadow:0 10px 24px -14px rgba(14,33,26,.6);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+/* Gentle lift + soft gold glow on hover */
+.brand:hover img{
+  transform:translateY(-3px);
+  border-color:var(--gold);
+  box-shadow:0 18px 32px -16px rgba(14,33,26,.65),0 0 0 5px rgba(217,160,43,.18);
+}
+.brand-txt{display:none;font-family:var(--display);font-size:1.02rem;line-height:1.1;color:var(--forest);
+  min-width:0;overflow-wrap:break-word}
+.brand-txt small{display:block;font:500 .62rem/1.4 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav a{
+  text-decoration:none;font-weight:500;font-size:1.01rem;padding:11px 17px;border-radius:999px;
+  transition:background .15s ease,color .15s ease;
+}
+.nav a:hover{background:rgba(20,86,63,.09)}
+.nav a.active{background:var(--forest);color:#fff}
+.head-cta{margin-left:14px}
+
+/* Mobile menu: a checkbox toggles the nav. It only exists on small screens,
+   so keyboard users on desktop never tab to a control that does nothing. */
+.nav-toggle{display:none}
+.burger{
+  display:none;margin-left:auto;width:46px;height:46px;border:1px solid var(--line);
+  border-radius:12px;background:#fff;cursor:pointer;position:relative;
+  flex:none;
+}
+.burger span,.burger::before,.burger::after{
+  content:"";position:absolute;left:13px;width:20px;height:2px;background:var(--ink);
+  transition:.2s;
+}
+.burger::before{top:16px}
+.burger span{top:22px}
+.burger::after{top:28px}
+
+@media(max-width:940px){
+  /* Focusable but invisible, so Space opens the menu for keyboard users */
+  .nav-toggle{
+    display:block;position:absolute;width:1px;height:1px;opacity:0;
+    pointer-events:none;margin:0;padding:0;border:0;left:50%;top:44px;
+  }
+  .nav-toggle:focus-visible ~ .burger{outline:3px solid var(--gold);outline-offset:3px}
+  .burger{display:block}
+  .head-cta{display:none}
+  /* Compact bar on small screens: logo scales down but stays prominent */
+  .head-in{height:88px;gap:13px}
+  .brand{gap:11px}
+  .brand img{height:54px;padding:5px 11px;border-radius:14px}
+  .brand:hover img{transform:none;box-shadow:0 10px 24px -14px rgba(14,33,26,.6)}
+  .nav{
+    position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:6px;
+    background:var(--cream);border-bottom:1px solid var(--line);
+    padding:16px 22px 26px;margin:0;
+    display:none;box-shadow:var(--shadow);
+  }
+  .nav a{padding:13px 16px;background:#fff;border:1px solid var(--line)}
+  /* When the checkbox is ticked, show the menu */
+  .nav-toggle:checked ~ .nav{display:flex}
+  .nav-toggle:checked ~ .burger span{opacity:0}
+  .nav-toggle:checked ~ .burger::before{top:22px;transform:rotate(45deg)}
+  .nav-toggle:checked ~ .burger::after{top:22px;transform:rotate(-45deg)}
+  .brand-txt{display:block}
+}
+
+/* ---------- 6. HERO ----------
+   A full-width shop photograph with a dark green scrim over it, and a
+   single left-aligned text block. Everything below is scoped to the hero. */
+.hero{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  min-height:60vh;                       /* ~60% of the screen, so the next
+                                            section still peeks into view */
+  padding:clamp(44px,6vh,72px) 0;
+  color:#F4EFE4;
+  /* Fallback: a rich green wash if the photograph never loads */
+  background:linear-gradient(150deg,#123f30 0%,#0d3527 55%,#08281e 100%);
+}
+
+/* The photograph fills the whole section, edge to edge */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;object-fit:cover;object-position:center;
+}
+
+/* Dark green scrim — heavy under the words so white text stays readable,
+   opening up to the right so the shop photograph reads through instead of
+   looking like a flat block of colour. */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(90deg,
+      rgba(7,28,21,.87) 0%,
+      rgba(7,28,21,.85) 64%,
+      rgba(7,28,21,.66) 78%,
+      rgba(7,28,21,.40) 90%,
+      rgba(7,28,21,.25) 100%),
+    linear-gradient(180deg,rgba(7,28,21,.05),rgba(7,28,21,.16));
+}
+/* Wide screens: the text block stops before half the width, so the
+   photograph can open up much sooner. */
+@media(min-width:1000px){
+  .hero-overlay{
+    background:
+      linear-gradient(90deg,
+        rgba(7,28,21,.87) 0%,
+        rgba(7,28,21,.85) 46%,
+        rgba(7,28,21,.67) 62%,
+        rgba(7,28,21,.42) 80%,
+        rgba(7,28,21,.27) 100%),
+      linear-gradient(180deg,rgba(7,28,21,.05),rgba(7,28,21,.16));
+  }
+}
+/* Phones and small tablets: the text runs the full width, so the whole
+   frame is scrimmed — lighter towards the bottom so the photo still shows */
+@media(max-width:768px){
+  .hero-overlay{
+    background:linear-gradient(180deg,
+      rgba(7,28,21,.87) 0%,rgba(7,28,21,.84) 58%,rgba(7,28,21,.70) 100%);
+  }
+}
+
+/* Text block: fills the container width, capped and centred by .wrap,
+   raised above the photograph. */
+.hero .wrap{position:relative;z-index:2;width:100%}
+
+/* Headline is the first thing in the hero and the clear focal point */
+.hero h1{
+  font-size:clamp(2.15rem,5vw,3.9rem);
+  line-height:1.05;letter-spacing:-.035em;color:#fff;
+  max-width:17ch;text-wrap:balance;
+}
+
+/* One short supporting sentence, never wider than ~52 characters */
+.hero-lede{
+  font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.6;
+  color:#DCE9E1;max-width:52ch;margin:20px 0 32px;
+}
+
+/* Shared with the About page — do not scope further than this */
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-cta .btn{padding:17px 30px}
+
+/* ---------- 7. BEAD STRING DIVIDER (decorative) ---------- */
+.beads{height:26px;background-repeat:repeat-x;background-size:118px 26px;
+  background-image:
+    radial-gradient(circle at 14px 13px,var(--gold) 0 6px,transparent 7px),
+    radial-gradient(circle at 44px 13px,var(--clay) 0 6px,transparent 7px),
+    radial-gradient(circle at 74px 13px,var(--forest) 0 6px,transparent 7px),
+    radial-gradient(circle at 104px 13px,#fff 0 6px,transparent 7px);
+}
+
+/* ---------- 8. SECTIONS ---------- */
+.section{padding:88px 0}
+.section.tint{background:var(--sand);border-block:1px solid var(--line)}
+.sec-head{max-width:64ch;margin-bottom:46px}
+.sec-head h2{font-size:clamp(1.9rem,4vw,3rem)}
+.sec-head p{margin-top:16px}
+
+/* ---------- 9. PRODUCT CARDS ----------
+   Column counts are set explicitly and chosen to divide the number of cards
+   in the group, so a row is never left with one stranded card. */
+.grid{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
+/* The Products page holds a group of 6 and a group of 3 — three across
+   divides both evenly. Higher specificity than the rule above. */
+@media(min-width:900px){.grid.threes{grid-template-columns:repeat(3,1fr)}}
+
+/* In the two-column band an odd-sized group leaves one card on its own.
+   Centre it so the row reads as deliberate rather than broken. */
+@media(min-width:600px) and (max-width:899px){
+  .grid > *:last-child:nth-child(odd),
+  .steps > *:last-child:nth-child(odd){
+    grid-column:1 / -1;
+    justify-self:center;
+    width:calc(50% - 13px);
+  }
+}
+
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+/* 4:3 rather than square: the picture was never the tall part, the text was.
+   max-height keeps cards from ballooning in wide two-column layouts. */
+.card-media{position:relative;aspect-ratio:4/3;max-height:280px;overflow:hidden;background:var(--sand)}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .card-media img{transform:scale(1.06)}
+.tag{
+  position:absolute;top:12px;left:12px;background:var(--gold);color:#20160a;
+  font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 11px;border-radius:999px;
+}
+.tag.green{background:var(--forest);color:#fff}
+.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-size:1.1rem;line-height:1.26;margin-bottom:6px}
+.card-body .desc{font-size:.9rem;line-height:1.55;color:var(--muted);margin-bottom:12px;flex:1}
+.price{font-family:var(--display);font-size:1.3rem;font-weight:600;color:var(--forest);letter-spacing:-.01em}
+.price small{display:block;font:400 .75rem/1.5 var(--body);color:var(--muted);letter-spacing:0;margin-top:2px}
+/* Full-width button: tidier than a ragged one, and it can never overflow
+   a narrow column. */
+.card .btn{margin-top:14px;width:100%;justify-content:center}
+
+/* ---------- 10. SPLIT (image + text) SECTIONS ---------- */
+.split{display:grid;gap:52px;align-items:center}
+/* Side by side, let the picture stretch to the text height so neither
+   column leaves a ragged block of empty space. */
+@media(min-width:900px){
+  .split{grid-template-columns:1fr 1fr;align-items:stretch}
+  .split-media{height:100%;min-height:340px}
+}
+.split.flip .split-media{order:2}
+.split-media{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.split-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.split-media .badge{
+  position:absolute;bottom:16px;left:16px;background:#fff;border-radius:14px;
+  padding:12px 18px;font-family:var(--display);font-size:1.05rem;box-shadow:var(--shadow);
+}
+.split h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:18px}
+.tick{list-style:none;padding:0;margin:22px 0 28px;display:grid;gap:13px}
+.tick li{position:relative;padding-left:34px;font-size:1rem}
+.tick li::before{
+  content:"";position:absolute;left:0;top:.42em;width:18px;height:18px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:inset 0 0 0 4px var(--cream);
+}
+
+/* ---------- 11. STEPS ---------- */
+/* Three steps: one column, then two, then three — never three then a lone card */
+.steps{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:600px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px;position:relative;
+}
+.step b.num{
+  font-family:var(--display);font-size:2.3rem;color:var(--gold);display:block;line-height:1;margin-bottom:8px;
+}
+.step h3{font-size:1.12rem;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:.94rem;line-height:1.55}
+
+/* ---------- 12. CATEGORY TILES ---------- */
+.tiles{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.tile{
+  position:relative;border-radius:var(--radius);overflow:hidden;min-height:320px;
+  display:flex;align-items:flex-end;color:#fff;text-decoration:none;
+  box-shadow:var(--shadow);
+}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.tile:hover img{transform:scale(1.07)}
+.tile::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,32,24,.9) 6%,rgba(8,32,24,.15) 62%)}
+.tile-in{position:relative;z-index:2;padding:28px}
+.tile-in h3{font-size:1.6rem;color:#fff}
+.tile-in span{font-size:.9rem;color:#CFE3D9;display:inline-flex;gap:7px;align-items:center;margin-top:8px}
+
+/* ---------- 13. QUOTE / VALUES BAND ---------- */
+.band{background:var(--forest);color:#EAF3EE;padding:80px 0}
+.band h2{color:#fff;font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:20ch}
+.band p{color:#BFDBCE;max-width:52ch}
+/* Four values: one, then two, then four — skipping three, which would
+   strand the last card on a row of its own */
+.values{display:grid;gap:26px;grid-template-columns:1fr;margin-top:44px}
+@media(min-width:600px){.values{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.values{grid-template-columns:repeat(4,1fr)}}
+.value{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--radius);padding:26px}
+.value h3{color:var(--gold-3);font-size:1.12rem;margin-bottom:8px}
+.value p{margin:0;font-size:.93rem;color:#C6DED3}
+
+/* ---------- 14. PRICE LIST TABLE ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);font-size:.97rem}
+th{background:var(--forest);color:#fff;font:600 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--sand)}
+td.amount{font-family:var(--display);font-size:1.08rem;color:var(--forest);white-space:nowrap;font-weight:600}
+
+/* ---------- 15. PAYMENT BOXES ---------- */
+.pay-grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.pay-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 22px;display:flex;flex-direction:column}
+.pay-box h3{font-size:1.24rem;margin-bottom:5px}
+.pay-box .how{font-size:.89rem;color:var(--muted);margin-bottom:14px}
+.pay-box ol{margin:0 0 16px;padding-left:20px;font-size:.95rem;display:grid;gap:8px}
+.details{background:var(--sand);border:1px dashed var(--forest);border-radius:var(--radius-sm);
+  padding:16px 18px;font-size:.93rem;margin-top:auto}
+.details dt{font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.details dt:first-child{margin-top:0}
+.details dd{margin:5px 0 0;font-weight:600;word-break:break-word}
+.sample{
+  display:inline-block;background:var(--clay);color:#fff;font:700 .64rem/1 var(--body);
+  letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:6px;margin-left:8px;
+  vertical-align:middle;
+}
+.notice{
+  background:#FFF6E3;border:1px solid var(--gold);border-left:6px solid var(--gold);
+  border-radius:var(--radius-sm);padding:22px 26px;margin-bottom:34px;
+}
+.notice h3,.notice h2{font-size:1.12rem;margin-bottom:8px;color:#7A5410;font-family:var(--display);font-weight:600;letter-spacing:-.01em}
+.notice p{margin:0;font-size:.95rem;color:#6B4E17}
+.notice p+p{margin-top:10px}
+
+/* ---------- 16. PROSE (policies / about text) ---------- */
+.prose{max-width:74ch}
+.prose h2{font-size:clamp(1.5rem,3vw,2rem);margin:44px 0 14px}
+.prose h2:first-child{margin-top:0}
+.prose h3{font-size:1.12rem;margin:26px 0 8px}
+.prose ul,.prose ol{padding-left:22px;margin:0 0 1.1em}
+.prose li{margin-bottom:8px}
+.prose strong{color:var(--forest)}
+.callout{background:#fff;border:1px solid var(--line);border-left:6px solid var(--forest);
+  border-radius:var(--radius-sm);padding:20px 24px;margin:26px 0;font-size:.97rem}
+
+/* ---------- 17. CTA STRIP ---------- */
+.cta{
+  background:
+    linear-gradient(rgba(9,44,32,.90),rgba(9,44,32,.90)),
+    url("images/eco.jpg") center/cover;
+  color:#fff;padding:76px 0;text-align:center;border-radius:0;
+}
+.cta h2{color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);max-width:18ch;margin-inline:auto}
+.cta p{color:#CBDCD2;max-width:50ch;margin:18px auto 30px}
+.cta .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- 18. FOOTER ---------- */
+.site-foot{background:#0B2A20;color:#A9C4B8;padding:64px 0 30px;font-size:.94rem}
+/* Four footer columns: one, then two, then four — three strands the last one */
+.foot-grid{display:grid;gap:40px;grid-template-columns:1fr}
+@media(min-width:600px){.foot-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.foot-grid{grid-template-columns:repeat(4,1fr)}}
+.foot-brand img{height:58px;width:auto;margin-bottom:16px}
+.foot-brand p{max-width:34ch;color:#8FAEA1;font-size:.9rem}
+.foot-col h2{font-family:var(--display);color:#fff;font-size:1.05rem;margin-bottom:14px;font-weight:600}
+.foot-col ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.foot-col a{text-decoration:none;transition:color .15s}
+.foot-col a:hover{color:var(--gold-2)}
+.foot-note{
+  margin-top:46px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  font-size:.84rem;color:#7E9C90;
+}
+.student{
+  background:rgba(217,160,43,.14);border:1px solid rgba(217,160,43,.4);
+  color:#F0D9A6;border-radius:var(--radius-sm);padding:14px 18px;
+  margin-top:30px;font-size:.86rem;text-align:center;
+}
+
+/* ---------- 19. PAGE HEADER FOR INNER PAGES ---------- */
+.page-head{
+  background:linear-gradient(150deg,#123f30,#0a2f23);color:#F4EFE4;
+  padding:70px 0 74px;position:relative;overflow:hidden;
+}
+.page-head::after{
+  content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(217,160,43,.35),transparent 68%);
+}
+.page-head h1{color:#fff;font-size:clamp(2.1rem,5vw,3.4rem);position:relative;z-index:2}
+.page-head p{color:#CBDCD2;max-width:56ch;margin-top:16px;position:relative;z-index:2;font-size:1.08rem}
+.crumbs{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#9DBAAE;
+  margin-bottom:18px;position:relative;z-index:2}
+.crumbs a{text-decoration:none;color:var(--gold-2)}
+
+/* ---------- 20. UTILITIES ---------- */
+.mt-0{margin-top:0}.mb-0{margin-bottom:0}
+.mt-2{margin-top:22px}.mt-3{margin-top:34px}.mt-4{margin-top:48px}
+.center-btn{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:14px;margin-top:44px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip-static{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;font-size:.86rem;font-weight:500;
+}
+
+/* ---------- 21. REVEAL ON SCROLL (progressive enhancement) ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 22. REDUCED MOTION ---------- */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ---------- 23. PRINT ---------- */
+@media print{
+  .site-head,.cta,.burger,.btn{display:none!important}
+  body{background:#fff}
+}

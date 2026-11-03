@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pearlecofriendly.co.ug/sitemap.xml
